@@ -85,8 +85,9 @@ public class MainController {
 	
 	
 	@RequestMapping("/post/edit/{id}")
-	public String edit(@PathVariable("id") Long id, Model model, @ModelAttribute("posts") Post post) {
+	public String edit(@PathVariable("id") Long id, Model model, @ModelAttribute("posts") Post post, HttpSession session) {
 		Post editPost = postService.find(id);
+		model.addAttribute("user", userService.findById((Long)session.getAttribute("userId")));
 		model.addAttribute("editPost", editPost);
 		return "EditPost.jsp";
 	}	

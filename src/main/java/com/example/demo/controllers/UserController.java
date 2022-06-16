@@ -33,6 +33,12 @@ public class UserController {
 	return "Login.jsp";
 	}
 	
+	@RequestMapping("/create")
+	public String create(Model model) {
+        model.addAttribute("newUser", new User());
+        model.addAttribute("newLogin", new LoginUser());
+	return "register.jsp";
+	}
 	
 	@PostMapping("/register")
     public String register(@Valid @ModelAttribute("newUser") User newUser, 
@@ -43,7 +49,7 @@ public class UserController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("newLogin", new LoginUser());
-			return "Login.jsp";
+			return "register.jsp";
 		}
 		
 		session.setAttribute("userID", user.getId());
